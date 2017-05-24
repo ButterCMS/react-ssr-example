@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "React server rendering example",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack && babel-node server.js"
   },
   "author": "Roger Jin",
   "dependencies": {
     "buttercms": "^1.0.15",
+    "express": "^4.15.3",
     "path": "^0.12.7",
     "react": "^0.14.8",
     "react-dom": "^0.14.8"
