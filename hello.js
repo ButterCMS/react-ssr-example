@@ -1,25 +1,15 @@
 import React from 'react';
 import Butter from 'buttercms'
+import Transmit from 'react-transmit';
 
 const butter = Butter('b60a008584313ed21803780bc9208557b3b49fbb');
 
 var Hello = React.createClass({
-  getInitialState: function() {
-    return {loaded: false};
-  },
-  componentWillMount: function() {
-    butter.post.list().then((resp) => {
-      this.setState({
-        loaded: true,
-        resp: resp.data
-      })
-    });
-  },
   render: function() {
-    if (this.state.loaded) {
+    if (this.props.posts) {
       return (
         <div>
-          {this.state.resp.data.map((post) => {
+          {this.props.posts.data.map((post) => {
             return (
               <div key={post.slug}>{post.title}</div>
             )
@@ -32,4 +22,13 @@ var Hello = React.createClass({
   }
 });
 
-export default Hello;
+export default Transmit.createContainer(Hello, {
+  // These must be set or else it would fail to render
+  initialVariables: {},
+  // Each fragment will be resolved into a prop
+  fragments: {
+    posts() {
+      return butter.post.list().then((resp) => resp.data);
+    }
+  }
+});

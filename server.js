@@ -4,16 +4,18 @@ import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Hello from './Hello.js';
+import Transmit from 'react-transmit';
 
 function handleRender(req, res) {
-  const html = ReactDOMServer.renderToString(<Hello />);
+  Transmit.renderToString(Hello).then(({reactString, reactData}) => {
+    fs.readFile('./index.html', 'utf8', function (err, data) {
+      if (err) throw err;
 
-  fs.readFile('./index.html', 'utf8', function (err, data) {
-    if (err) throw err;
+      const document = data.replace(/<div id="app"><\/div>/, `<div id="app">${reactString}</div>`);
+      const output = Transmit.injectIntoMarkup(document, reactData, ['/build/client.js']);
 
-    const document = data.replace(/<div id="app"><\/div>/, `<div id="app">${html}</div>`);
-
-    res.send(document);
+      res.send(document);
+    });
   });
 }
 

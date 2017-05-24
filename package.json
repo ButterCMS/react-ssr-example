@@ -11,7 +11,8 @@
     "express": "^4.15.3",
     "path": "^0.12.7",
     "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "react-dom": "^0.14.8",
+    "react-transmit": "^3.2.0"
   },
   "devDependencies": {
     "webpack": "^1.12.14",
