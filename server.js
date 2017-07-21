@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Hello from './Hello.js';
+import Hello from './hello.js';
 import Transmit from 'react-transmit';
 
 function handleRender(req, res) {
