@@ -11,7 +11,7 @@ function handleRender(req, res) {
     fs.readFile('./index.html', 'utf8', function (err, data) {
       if (err) throw err;
 
-      const document = data.replace(/<div id="app"><\/div>/, `<div id="app">${reactString}</div>`);
+      const document = data.replace(/<div id="app"><\/div>/, `<div id="app"><section role="main" class="react-container"><div>${reactString}</div></section></div>`);
       const output = Transmit.injectIntoMarkup(document, reactData, ['/build/client.js']);
 
       res.send(document);
